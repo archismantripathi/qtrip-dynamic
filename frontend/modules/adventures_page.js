@@ -5,21 +5,45 @@ import config from "../conf/index.js";
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
-
+  return search.split("city=")[1].split('&')[0];
 }
 
 //Implementation of fetch call with a paramterized input based on city
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
-
+  try {
+    const res = await fetch(config.backendEndpoint+"/adventures?city="+city);
+    return await res.json();
+  } catch (error) {
+    return null;
+  }
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
-
+  adventures.forEach(adventure => {
+    const div = document.createElement("div");
+    div.className = "col col-6 col-lg-3 mb-4";
+    div.innerHTML = 
+    `<a href="detail/?adventure=${adventure.id}" class="activity-card" id="${adventure.id}">
+      <img src="${adventure.image}" alt="${adventure.name}"/>
+      <div class="w-100 p-2">
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
+          <h6 class="mb-1">${adventure.name}</h6>
+          <h6 class="mb-1">₹${adventure.costPerHead}</h6>
+        </div>
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
+          <h6 class="mb-1">Duration</h6>
+          <h6 class="mb-1">${adventure.duration} Hours</h6>
+        </div>
+      </div>
+      <div class="category-banner">${adventure.category}</div>
+    </a>`;
+    document.getElementById("data").append(div);
+  });
 }
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
