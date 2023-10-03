@@ -96,7 +96,15 @@ function saveFiltersToLocalStorage(filters) {
 function getFiltersFromLocalStorage() {
   // TODO: MODULE_FILTERS
   // 1. Get the filters from localStorage and return String read as an object
-  
+  const data = localStorage.getItem("filters");
+  if(data) {
+    try {
+      return JSON.parse(data);
+    } catch (error) {
+      localStorage.removeItem(filters);
+      throw('Parse Error, cleared filters from localStorage!');
+    }
+  }
   // Place holder for functionality to work in the Stubs
   return null;
 }
@@ -108,6 +116,7 @@ function getFiltersFromLocalStorage() {
 function generateFilterPillsAndUpdateDOM(filters) {
   // TODO: MODULE_FILTERS
   // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
+  
 }
 export {
   getCityFromURL,
