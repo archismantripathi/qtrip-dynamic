@@ -25,7 +25,7 @@ async function fetchAdventures(city) {
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
-  document.getElementById("data").innerHTML = '';
+  document.getElementById("data").innerHTML = "";
   adventures.forEach((adventure) => {
     const div = document.createElement("div");
     div.className = "col col-6 col-lg-3 mb-4";
@@ -60,8 +60,7 @@ function filterByCategory(list, categoryList) {
   // 1. Filter adventures based on their Category and return filtered list
   return list.filter((adv) => {
     for (let i = 0; i < categoryList.length; i++) {
-      if(adv.category == categoryList[i])
-        return true;
+      if (adv.category == categoryList[i]) return true;
     }
     return false;
   });
@@ -78,12 +77,11 @@ function filterFunction(list, filters) {
   // TODO: MODULE_FILTERS
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
   // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
-  if(!(filters.duration === '')) {
-    const durationArr = filters.duration.split('-');
+  if (!(filters.duration === "")) {
+    const durationArr = filters.duration.split("-");
     list = filterByDuration(list, durationArr[0], durationArr[1]);
   }
-  if(filters.category.length)
-    list = filterByCategory(list, filters.category);
+  if (filters.category.length) list = filterByCategory(list, filters.category);
   // Place holder for functionality to work in the Stubs
   return list;
 }
@@ -101,12 +99,12 @@ function getFiltersFromLocalStorage() {
   // TODO: MODULE_FILTERS
   // 1. Get the filters from localStorage and return String read as an object
   const data = localStorage.getItem("filters");
-  if(data) {
+  if (data) {
     try {
       return JSON.parse(data);
     } catch (error) {
       localStorage.removeItem(filters);
-      throw('Parse Error, cleared filters from localStorage!');
+      throw "Parse Error, cleared filters from localStorage!";
     }
   }
   // Place holder for functionality to work in the Stubs
@@ -120,7 +118,13 @@ function getFiltersFromLocalStorage() {
 function generateFilterPillsAndUpdateDOM(filters) {
   // TODO: MODULE_FILTERS
   // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
-  
+  document.getElementById("category-list").innerHTML = "";
+  filters.category.forEach((category) => {
+    const pill = document.createElement("div");
+    pill.classList = "category-filter";
+    pill.innerText = category;
+    document.getElementById("category-list").append(pill);
+  });
 }
 export {
   getCityFromURL,
