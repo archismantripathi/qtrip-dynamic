@@ -82,7 +82,7 @@ footer {
 
   /* Set a specific height */
   height: 50vh;
-  width: 100%;
+  width: 100vw;
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
   background-repeat: no-repeat;
