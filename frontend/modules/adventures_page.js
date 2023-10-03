@@ -31,13 +31,13 @@ function addAdventureToDOM(adventures) {
     `<a href="detail/?adventure=${adventure.id}" class="activity-card" id="${adventure.id}">
       <img src="${adventure.image}" alt="${adventure.name}"/>
       <div class="w-100 p-2">
-        <div class="d-flex flex-wrap justify-content-between align-items-center">
-          <h6 class="mb-1">${adventure.name}</h6>
-          <h6 class="mb-1">₹${adventure.costPerHead}</h6>
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-1 mx-2">
+          <h6 class="mb-0">${adventure.name} </h6>
+          <h6 class="mb-0"> ₹${adventure.costPerHead}</h6>
         </div>
-        <div class="d-flex flex-wrap justify-content-between align-items-center">
-          <h6 class="mb-1">Duration</h6>
-          <h6 class="mb-1">${adventure.duration} Hours</h6>
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-1 mx-2">
+          <h6 class="mb-0">Duration </h6>
+          <h6 class="mb-0"> ${adventure.duration} Hours</h6>
         </div>
       </div>
       <div class="category-banner">${adventure.category}</div>
