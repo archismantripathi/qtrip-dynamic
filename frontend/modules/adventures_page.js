@@ -1,11 +1,10 @@
-
 import config from "../conf/index.js";
 
 //Implementation to extract city from query params
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
-  return search.split("city=")[1].split('&')[0];
+  return search.split("city=")[1].split("&")[0];
 }
 
 //Implementation of fetch call with a paramterized input based on city
@@ -13,7 +12,9 @@ async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
   try {
-    const res = await fetch(config.backendEndpoint+"/adventures?city="+city);
+    const res = await fetch(
+      config.backendEndpoint + "/adventures?city=" + city
+    );
     return await res.json();
   } catch (error) {
     return null;
@@ -24,11 +25,10 @@ async function fetchAdventures(city) {
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
-  adventures.forEach(adventure => {
+  adventures.forEach((adventure) => {
     const div = document.createElement("div");
     div.className = "col col-6 col-lg-3 mb-4";
-    div.innerHTML = 
-    `<a href="detail/?adventure=${adventure.id}" class="activity-card" id="${adventure.id}">
+    div.innerHTML = `<a href="detail/?adventure=${adventure.id}" class="activity-card" id="${adventure.id}">
       <img src="${adventure.image}" alt="${adventure.name}"/>
       <div class="w-100 p-2">
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-1 mx-2">
@@ -50,14 +50,20 @@ function addAdventureToDOM(adventures) {
 function filterByDuration(list, low, high) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on Duration and return filtered list
-  return list.filter(obj => low <= obj.duration && obj.duration <= high);
+  return list.filter((adv) => low <= adv.duration && adv.duration <= high);
 }
 
 //Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
 function filterByCategory(list, categoryList) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
-  
+  return list.filter((adv) => {
+    for (let i = 0; i < categoryList.length; i++) {
+      if(adv.category == categoryList[i])
+        return true;
+    }
+    return false;
+  });
 }
 
 // filters object looks like this filters = { duration: "", category: [] };
@@ -71,7 +77,6 @@ function filterFunction(list, filters) {
   // TODO: MODULE_FILTERS
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
   // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
-
 
   // Place holder for functionality to work in the Stubs
   return list;
@@ -90,7 +95,6 @@ function getFiltersFromLocalStorage() {
   // TODO: MODULE_FILTERS
   // 1. Get the filters from localStorage and return String read as an object
 
-
   // Place holder for functionality to work in the Stubs
   return null;
 }
@@ -102,7 +106,6 @@ function getFiltersFromLocalStorage() {
 function generateFilterPillsAndUpdateDOM(filters) {
   // TODO: MODULE_FILTERS
   // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
-
 }
 export {
   getCityFromURL,
