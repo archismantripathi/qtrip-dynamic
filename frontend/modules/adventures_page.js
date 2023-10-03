@@ -77,6 +77,8 @@ function filterFunction(list, filters) {
   // TODO: MODULE_FILTERS
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
   // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
+  if(filters.duration === ''|| !filters.category.length)
+    return list;
   const durationArr = filters.duration.split('-');
   var filteredList = filterByDuration(list, durationArr[0], durationArr[1]);
   filteredList = filterByCategory(filteredList, filters.category);
