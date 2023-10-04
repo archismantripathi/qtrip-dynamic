@@ -13,10 +13,14 @@ function getAdventureIdFromURL(search) {
 async function fetchAdventureDetails(adventureId) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Fetch the details of the adventure by making an API call
-
-
-  // Place holder for functionality to work in the Stubs
-  return null;
+  try {
+    const res = await fetch(
+      config.backendEndpoint + "/adventures/detail?adventure=" + adventureId
+    );
+    return await res.json();
+  } catch (error) {
+    return null;
+  }
 }
 
 //Implementation of DOM manipulation to add adventure details to DOM
