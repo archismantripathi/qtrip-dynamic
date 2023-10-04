@@ -5,7 +5,7 @@ function getAdventureIdFromURL(search) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Get the Adventure Id from the URL
   const adventure = search.split("adventure=")[1].split("&")[0];
-  if(adventure.length) return adventure;
+  if (adventure.length) return adventure;
   // Place holder for functionality to work in the Stubs
   return null;
 }
@@ -27,28 +27,40 @@ async function fetchAdventureDetails(adventureId) {
 function addAdventureDetailsToDOM(adventure) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Add the details of the adventure to the HTML DOM
-
+  document.getElementById("adventure-name").innerHTML = adventure.name;
+  document.getElementById("adventure-subtitle").innerHTML = adventure.subtitle;
+  document.getElementById("adventure-content").innerHTML = adventure.content;
+  const photoGallery = document.getElementById("photo-gallery");
+  adventure.images.forEach((imageLink) => {
+    const div = document.createElement("div");
+    div.classList = "activity-card-image";
+    div.innerHTML = 
+    `<img 
+      src="${imageLink}" 
+      alt="${adventure.name}" 
+      class="img-fluid adventure-card-image"
+      >`;
+    photoGallery.append(div);
+  });
+  console.log(adventure);
 }
 
 //Implementation of bootstrap gallery component
 function addBootstrapPhotoGallery(images) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Add the bootstrap carousel to show the Adventure images
-
 }
 
 //Implementation of conditional rendering of DOM based on availability
 function conditionalRenderingOfReservationPanel(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. If the adventure is already reserved, display the sold-out message.
-
 }
 
 //Implementation of reservation cost calculation based on persons
 function calculateReservationCostAndUpdateDOM(adventure, persons) {
   // TODO: MODULE_RESERVATIONS
   // 1. Calculate the cost based on number of persons and update the reservation-cost field
-
 }
 
 //Implementation of reservation form submission
@@ -62,7 +74,6 @@ function captureFormSubmit(adventure) {
 function showBannerIfAlreadyReserved(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. If user has already reserved this adventure, show the reserved-banner, else don't
-
 }
 
 export {
