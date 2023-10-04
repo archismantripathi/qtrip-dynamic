@@ -34,21 +34,78 @@ function addAdventureDetailsToDOM(adventure) {
   adventure.images.forEach((imageLink) => {
     const div = document.createElement("div");
     div.classList = "activity-card-image";
-    div.innerHTML = 
-    `<img 
+    div.innerHTML = `<img 
       src="${imageLink}" 
       alt="${adventure.name}" 
       class="img-fluid adventure-card-image"
       >`;
     photoGallery.append(div);
   });
-  console.log(adventure);
 }
 
 //Implementation of bootstrap gallery component
 function addBootstrapPhotoGallery(images) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Add the bootstrap carousel to show the Adventure images
+  const photoGallery = document.getElementById("photo-gallery");
+  photoGallery.classList = "carousel slide";
+  photoGallery.setAttribute("data-bs-ride", "carousel");
+  photoGallery.innerHTML = "";
+
+  const indicators = document.createElement("div");
+  indicators.classList = "carousel-indicators";
+
+  const slides = document.createElement("div");
+  slides.classList = "carousel-inner";
+
+  for (let i = 0; i < images.length; i++) {
+    const button = document.createElement("button");
+    button.setAttribute("type", "button");
+    button.setAttribute("data-bs-target", "#photo-gallery");
+    button.setAttribute("data-bs-slide-to", i);
+    if (!i) {
+      button.classList = "active";
+      button.setAttribute("aria-current", true);
+    }
+    button.setAttribute("aria-label", "Slide " + (i + 1));
+
+    indicators.append(button);
+
+    const div = document.createElement("div");
+    div.classList = "carousel-item";
+
+    if (!i) div.classList += " active";
+    div.innerHTML = `<img 
+        src="${images[i]}"
+        class="d-block activity-card-image"
+        alt="Image ${i + 1}"
+        >`;
+    slides.append(div);
+  }
+
+  const prev = document.createElement("button");
+  const next = document.createElement("button");
+  prev.classList = "carousel-control-prev";
+  next.classList = "carousel-control-next";
+  prev.setAttribute("type", "button");
+  next.setAttribute("type", "button");
+  prev.setAttribute("data-bs-target", "#photo-gallery");
+  next.setAttribute("data-bs-target", "#photo-gallery");
+  prev.setAttribute("data-bs-slide", "prev");
+  next.setAttribute("data-bs-slide", "next");
+  prev.innerHTML = `<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Previous</span>`;
+  next.innerHTML = `<span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Next</span>`;
+
+  if (images.length !== 1) photoGallery.append(indicators);
+
+  photoGallery.append(slides);
+
+  if (images.length !== 1) {
+    photoGallery.append(prev);
+    photoGallery.append(next);
+  }
 }
 
 //Implementation of conditional rendering of DOM based on availability
