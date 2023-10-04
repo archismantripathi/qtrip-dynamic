@@ -4,8 +4,8 @@ import config from "../conf/index.js";
 function getAdventureIdFromURL(search) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Get the Adventure Id from the URL
-
-
+  const adventure = search.split("adventure=")[1].split("&")[0];
+  if(adventure.length) return adventure;
   // Place holder for functionality to work in the Stubs
   return null;
 }
