@@ -144,7 +144,6 @@ function captureFormSubmit(adventure) {
       person: form.elements.person.value,
       adventure: adventure.id
     }
-    console.log(body);
     try {
       const res = await fetch(config.backendEndpoint + "/reservations/new", 
       {
